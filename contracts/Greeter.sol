@@ -11,25 +11,21 @@ contract Greeter {
         greeting = _greeting;
     }
 
-    function greet() constant returns (string) {
-        return greeting;
-    }
-
-    function greet(bytes name) public constant returns (bytes) {
-        bytes memory b_greetings = bytes(greeting);
+    function greeting(bytes name) public constant returns (bytes) {
+        bytes memory b_greeting = bytes(greeting);
         bytes memory named_greeting = new bytes(
-            b_greetings.length + 1 + name.length
+            b_greeting.length + 1 + name.length
         );
         uint i;
 
-        for (i = 0; i < b_greetings.length; i++) {
-            named_greeting[i] = b_greetings[i];
+        for (i = 0; i < b_greeting.length; i++) {
+            named_greeting[i] = b_greeting[i];
         }
 
-        named_greeting[b_greetings.length] = ' ';
+        named_greeting[b_greeting.length] = ' ';
 
         for (i = 0; i < name.length; i++) {
-            named_greeting[b_greetings.length + 1 + i] = name[i];
+            named_greeting[b_greeting.length + 1 + i] = name[i];
         }
 
         return named_greeting;
