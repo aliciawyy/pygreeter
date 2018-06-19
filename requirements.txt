@@ -1,5 +1,6 @@
 populus==2.2.0
 eth-utils==0.7.1
 web3==3.16.5
+rlp==0.6.0
 pytest==3.6.1
 pytest-cov==2.5.1
