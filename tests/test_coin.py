@@ -14,3 +14,14 @@ def test_mint(chain, accounts):
     txn_hash = coin.transact().mint(account, 30)
     chain.wait.for_receipt(txn_hash)
     assert 51 == coin.call().balances(account)
+
+
+def test_mint_from_another_account(chain, accounts):
+    coin, _ = chain.provider.get_or_deploy_contract('Coin')
+    account = accounts[1]
+    assert coin.call().minter() != account
+    transaction = {"from": account}
+    txn_hash = coin.transact(transaction).mint(accounts[2], 30)
+    chain.wait.for_receipt(txn_hash)
+    assert 0 == coin.call().balances(accounts[2])
+
