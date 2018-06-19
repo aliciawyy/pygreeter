@@ -17,4 +17,4 @@ def test_custom_greeting(chain):
 
 def test_named_greeting(chain):
     greeter, _ = chain.provider.get_or_deploy_contract("Greeter")
-    assert "Hello Kitty" == greeter.call().greet("Kitty")
+    assert "Hello Kitty" == greeter.call().greeting("Kitty")
