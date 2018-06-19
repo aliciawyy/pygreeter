@@ -3,7 +3,6 @@ pragma solidity ^0.4.0;
 contract Greeter {
     string public greeting;
 
-    // TODO: Populus seems to get no bytecode if `internal`
     function Greeter() public {
         greeting = 'Hello';
     }
@@ -12,7 +11,27 @@ contract Greeter {
         greeting = _greeting;
     }
 
-    function greet() public constant returns (string) {
+    function greet() constant returns (string) {
         return greeting;
+    }
+
+    function greet(bytes name) public constant returns (bytes) {
+        bytes memory b_greetings = bytes(greeting);
+        bytes memory named_greeting = new bytes(
+            b_greetings.length + 1 + name.length
+        );
+        uint i;
+
+        for (i = 0; i < b_greetings.length; i++) {
+            named_greeting[i] = b_greetings[i];
+        }
+
+        named_greeting[b_greetings.length] = ' ';
+
+        for (i = 0; i < name.length; i++) {
+            named_greeting[b_greetings.length + 1 + i] = name[i];
+        }
+
+        return named_greeting;
     }
 }

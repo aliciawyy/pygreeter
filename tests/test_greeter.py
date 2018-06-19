@@ -13,3 +13,8 @@ def test_custom_greeting(chain):
 
     greeting = greeter.call().greet()
     assert greeting == 'Guten Tag'
+
+
+def test_named_greeting(chain):
+    greeter, _ = chain.provider.get_or_deploy_contract("Greeter")
+    assert "Hello Kitty" == greeter.call().greet("Kitty")
